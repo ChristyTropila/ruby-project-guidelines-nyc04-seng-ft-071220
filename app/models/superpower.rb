@@ -9,9 +9,3 @@ class Superpower < ActiveRecord::Base
 end
 
 
-
-# wind=Superpower.new(name: "WindBlaster", description: "Spins enemies to death")
-# fire=Superpower.new(name: "Firewave", description: "Melts enemies in seconds")
-
-# windy=Superhero.new(name: "WindyB")
-# heat=Superhero.new(name: "HeatB")
