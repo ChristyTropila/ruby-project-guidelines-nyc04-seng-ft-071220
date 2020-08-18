@@ -6,6 +6,16 @@ class Superpower < ActiveRecord::Base
     has_many :superheros
     has_many :organizations, through: :superheros
 
+
+
+
+
+     def self.get_superpower_names
+            power=Superpower.all.map do |powers|
+                powers.name
+            end
+        end
+
 end
 
 
