@@ -14,13 +14,31 @@ class Superhero < ActiveRecord::Base
 
     #CRUD METHODS
 
-    
+
     #return a hash of all heros with name id key value pairs
     def self.all_names
         Superhero.all.map do |hero|
-            {hero.name => hero.id}
+            {"#{hero.name} #{Superpower.find_by_id(hero.id)}" => hero.id}
+          #    binding.pry
         end
     end
+
+    def self.all_superpowers
+        Superhero.all.map do |hero|
+            {hero.superpower => hero.id}
+         #   binding.pry
+        end
+    end
+
+    def find_by_id(id)
+       Superhero.all.select do |hero|
+        if hero.id=id
+         hero
+        end
+    end
+        
+    end
+
 
 
 

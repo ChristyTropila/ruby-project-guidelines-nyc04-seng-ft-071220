@@ -77,8 +77,16 @@ class Interface
      def display_and_add_superpower
      super_to_add_power=prompt.select("Which Superhero Would You Like to assign a superpower to?", self.user.superheros.all_names)
      chosen_superpower=prompt.select("Choose a Superpower to assign", Superpower.all_names)
-     updated_sup=Superhero.create(id: super_to_add_power, superpower_id: chosen_superpower)
-         
+   #  updated_superhero=self.user.superheros.find_by_id(super_to_add_power)
+    #  updated_sup=Superhero.update(id: super_to_add_power, superpower_id: chosen_superpower)
+   
+    find_superhero_by_id=self.user.superheros.find_by_id(super_to_add_power)
+    find_superpower_by_id=self.user.superheros.all.select do |hero|
+                              hero.superpower_id = chosen_superpower
+                      
+    end
+
+        # binding.pry
         self.main_menu()
      end
     
