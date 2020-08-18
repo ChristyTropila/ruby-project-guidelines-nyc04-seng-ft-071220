@@ -3,7 +3,7 @@ require 'pry'
 class Interface
 
     attr_reader :prompt
-    attr_accessor :user
+    attr_accessor :user, :superpower
 
 
     def initialize
@@ -58,6 +58,8 @@ class Interface
      def display_user_superheros
       puts "*************************"
       puts self.user.superheros.all_names
+      puts self.user.superheros.all_superpowers
+    #  binding.pry
       puts "*************************"
       sleep 5
           # self.user.superheros
@@ -77,16 +79,11 @@ class Interface
      def display_and_add_superpower
      super_to_add_power=prompt.select("Which Superhero Would You Like to assign a superpower to?", self.user.superheros.all_names)
      chosen_superpower=prompt.select("Choose a Superpower to assign", Superpower.all_names)
-   #  updated_superhero=self.user.superheros.find_by_id(super_to_add_power)
-    #  updated_sup=Superhero.update(id: super_to_add_power, superpower_id: chosen_superpower)
-   
-    find_superhero_by_id=self.user.superheros.find_by_id(super_to_add_power)
-    find_superpower_by_id=self.user.superheros.all.select do |hero|
-                              hero.superpower_id = chosen_superpower
-                      
-    end
-
-        # binding.pry
+    #  find_superhero_by_id=self.user.superheros.all.map do |hero|
+    #                           hero.superpower_id =chosen_superpower
+    #  end
+    supName=Superpower.find_by_id(chosen_superpower)
+      binding.pry
         self.main_menu()
      end
     

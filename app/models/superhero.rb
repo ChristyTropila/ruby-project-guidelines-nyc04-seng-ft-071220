@@ -18,15 +18,17 @@ class Superhero < ActiveRecord::Base
     #return a hash of all heros with name id key value pairs
     def self.all_names
         Superhero.all.map do |hero|
-            {"#{hero.name} #{Superpower.find_by_id(hero.id)}" => hero.id}
-          #    binding.pry
+            {hero.name => hero.id}
+           # binding.pry
         end
     end
+
 
     def self.all_superpowers
         Superhero.all.map do |hero|
             {hero.superpower => hero.id}
-         #   binding.pry
+
+            #binding.pry
         end
     end
 

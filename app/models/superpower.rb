@@ -21,7 +21,7 @@ class Superpower < ActiveRecord::Base
 
     def find_by_id(id)
         Superpower.all.select do |power|
-         if power.id=id
+         if power.id==id
           power.name
          end
      end
