@@ -7,6 +7,9 @@ class Superhero < ActiveRecord::Base
     belongs_to :superpower
     belongs_to :organization
 
+    has_many :user_superheros
+    has_many :users, through: :user_superheros
+
     
 
     #CRUD METHODS

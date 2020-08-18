@@ -5,4 +5,18 @@ class Organization < ActiveRecord::Base
     has_many :superheros
     has_many :superpowers, through: :superheros
 
+
+
+
+    #get all organizations namee
+    def self.get_organization_names
+        orgs=Organization.all.map do |org|
+            org.name
+        end
+    end
+
+
+    def self.get_superpower_through_superhero(name:)
+        hero=Superhero.new(name:)
+        hero.
 end

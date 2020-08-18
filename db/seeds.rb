@@ -27,7 +27,6 @@ light_smasher=Superhero.create(name: "The Light Smasher")
 fearless_ant=Superhero.create(name: "The Fearless Ant")
 confident_ox=Superhero.create(name: "The Confident Ox")
 
-Superpower.find(18).destroy
 
 
 

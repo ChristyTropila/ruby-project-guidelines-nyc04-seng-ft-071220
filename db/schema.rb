@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_17_143900) do
+ActiveRecord::Schema.define(version: 2020_08_18_004402) do
 
   create_table "organizations", force: :cascade do |t|
     t.string "name"
@@ -21,11 +21,21 @@ ActiveRecord::Schema.define(version: 2020_08_17_143900) do
     t.string "name"
     t.integer "superpower_id"
     t.integer "organization_id"
+    t.integer "user_id"
   end
 
   create_table "superpowers", force: :cascade do |t|
     t.string "name"
     t.string "description"
+  end
+
+  create_table "user_superheros", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "superhero_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
   end
 
 end
