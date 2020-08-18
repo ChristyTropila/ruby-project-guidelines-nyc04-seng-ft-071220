@@ -16,7 +16,8 @@ class Organization < ActiveRecord::Base
     end
 
 
-    def self.get_superpower_through_superhero(name:)
-        hero=Superhero.new(name:)
-        hero.
+    def self.get_superpower_through_superhero(name)
+        hero=Superhero.new(name)
+        hero
+     end
 end

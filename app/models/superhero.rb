@@ -13,21 +13,60 @@ class Superhero < ActiveRecord::Base
     
 
     #CRUD METHODS
-    #create a new instance of a superhero
-    def self.create_new_hero
 
-    end
-
-
-
-   #READ METHODS
-   
-   #returns the names of all the superheros 
-  def self.get_superhero_names
-    hero=Superhero.all.map do |heros|
-        heros.name
+    
+    #return a hash of all heros with name id key value pairs
+    def self.all_names
+        Superhero.all.map do |hero|
+            {hero.name => hero.id}
         end
     end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#     #create a new instance of a superhero
+#     def self.create
+      
+
+
+#    #READ METHODS
+   
+#    #returns the names of all the superheros in a hash format
+#   def self.all_names
+#     Superhero.all.map do |heros|
+#        {heros.name => heros.id}
+#         end
+#     end
+    
+
+   
+# def self.power_by_superhero
+#     Superhero.all.map do |supers|
+#         supers.superpower
+# binding.pry
+#     end
+# end
+
 
 
 

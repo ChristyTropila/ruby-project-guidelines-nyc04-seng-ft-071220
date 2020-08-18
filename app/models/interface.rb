@@ -3,60 +3,109 @@ require 'pry'
 class Interface
 
     attr_reader :prompt
-
-    @user
+    attr_accessor :user
 
 
     def initialize
         @prompt = TTY::Prompt.new
      end
 
+     #This menu will first be displayed when a user runs rake :start
      def welcome
-          prompt.select("What would you like to do?") do |menu|
-            menu.choice "Create new Superhero Character", -> {superhero_helper}
-            menu.choice "View your Superheros", -> {see_all_superheros}
+          user_inpupt=prompt.select("Welcome to the Game of Superheros.") do |menu|
+            menu.choice "Register an Account", -> {register_user_helper}
+            menu.choice "Log Into Existing Account", -> {user_login_helper}
+
           end
+        end
+
+
+     #Register a user
+     def register_user_helper
+        userReturnValue=User.register()
+        until userReturnValue
+              userReturnValue=User.register()
+        end
+         self.user=userReturnValue
+         self.main_menu
+     end
+
+     #Login 
+     def user_login_helpepr
+        userReturnValue=User.login()
+     end
+      
+
+
+
+     #After a user is registered, this is the main menu that user will see
+     def main_menu
+         user.reload
+         system "clear"
+         puts "Welcome, #{self.user.name}"
+         prompt.select("What would you like to do?") do |menu|
+          menu.choice "View Your Superheros", -> {display_user_superheros}
+          menu.choice "Create A Superhero", -> {display_and_add_a_superhero}
+          menu.choice "Give Your Superhero A Superpower", ->{display_and_add_superpower}
+          menu.choice "Edit Your Superheros", -> {}
+          menu.choice "Remove Your Superheros", -> {}
+          menu.choice "Exit And Log Out", -> {}
+         end
+     end
+
+
+     #helper method to get a list of superheros associated with current user
+     def display_user_superheros
+      puts "*************************"
+      puts self.user.superheros.all_names
+      puts "*************************"
+      sleep 5
+          # self.user.superheros
+          # self.user.user_superheros
+          self.main_menu()
+     end
+
+     #This helper method will add a superhero to a users collection
+     def display_and_add_a_superhero
+        choosen_superhero_id=prompt.select("Choose A Superhero Please", Superhero.all_names)
+        userSup= UserSuperhero.create(user_id: self.user.id, superhero_id: choosen_superhero_id)
+       
+        self.main_menu()
+     end
+
+   #This helper method will list all superpowers and assign to a superhero
+     def display_and_add_superpower
+     super_to_add_power=prompt.select("Which Superhero Would You Like to assign a superpower to?", self.user.superheros.all_names)
+     chosen_superpower=prompt.select("Choose a Superpower to assign", Superpower.all_names)
+     updated_sup=Superhero.create(id: super_to_add_power, superpower_id: chosen_superpower)
+         
+        self.main_menu()
      end
     
 
-     #This method ask the user to choose a Superhero that they woud like to acquire
-     def superhero_helper
-      
-      hero=Superhero.get_superhero_names
-      #binding.pry
-      user_choice=prompt.select("Choose a Superhero")do |menu|
-        menu.choice "#{ hero.uniq.sample}"
-        menu.choice "#{ hero.uniq.sample}"
-        menu.choice "#{ hero.uniq.sample}"
-        menu.choice  "#{ hero.uniq.sample}"
-       # binding.pry
-            end
-        power=choose_superpower
-        user=User.new
-        user.add_superhero_to_users_list(hero)
-         
-       puts "You have chosen #{user_choice} and #{power} power."
-          end
-      
 
-# helper method to ask user to choose a superpower
-    def choose_superpower
-      powers=Superpower.get_superpower_names
-      user_choice= prompt.select("Choose a Superpower for your Superhero") do |menu|
-        menu.choice " #{powers.uniq.sample}"
-        menu.choice "#{powers.uniq.sample}"
-        menu.choice "#{powers.uniq.sample}"
-        menu.choice  "#{powers.uniq.sample}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       end
-    end
-
-
-  #helper method to see all superheros that user has created
-
-     def create_new_user
-      new_user=User.new
-      new_user
-     end
 
   
-  end

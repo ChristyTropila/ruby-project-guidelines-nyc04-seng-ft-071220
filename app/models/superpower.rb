@@ -8,13 +8,13 @@ class Superpower < ActiveRecord::Base
 
 
 
-
-
-     def self.get_superpower_names
-            power=Superpower.all.map do |powers|
-                powers.name
-            end
+    #method that prints out all names of Superpowers
+     def self.all_names
+        Superpower.all.map do |power|
+            {power.name => power.description}
         end
+    end
+
 
 end
 

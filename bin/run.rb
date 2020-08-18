@@ -11,3 +11,4 @@ cli=Interface.new
 #binding.pry
 #cli.initialize
 cli.welcome
+cli.mainmenu
